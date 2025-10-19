@@ -1,6 +1,6 @@
 # vvim
 
-A comprehensive Neovim configuration with modern features, extensive theme support, LSP integration, and AI-powered development tools.
+A comprehensive development environment setup featuring Neovim configuration with modern features, extensive theme support, LSP integration, AI-powered development tools, and a beautifully configured Ghostty terminal.
 
 ## 🚀 Features
 
@@ -44,6 +44,13 @@ A comprehensive Neovim configuration with modern features, extensive theme suppo
 - **Octo** - GitHub PR/issue management
 - Git hunk operations and blame
 
+### 🖥️ **Ghostty Terminal**
+- **Modern Terminal** - Fast, GPU-accelerated terminal emulator
+- **Beautiful Transparency** - 80% background opacity with blur effects
+- **Clean Interface** - No window decorations for minimal distraction
+- **Comfortable Padding** - 10px padding for better visual appeal
+- **Frosted Glass Effect** - Background blur for modern aesthetics
+
 ### ⚡ **Productivity Features**
 - **Auto-session** - Restore previous sessions
 - **Which-key** - Keybinding hints
@@ -60,10 +67,14 @@ vvim/
 ├── lua/
 │   ├── plugins.lua    # Plugin configurations
 │   └── themes.lua     # Theme management system
-└── lazy-lock.json     # Plugin version lock file
+├── lazy-lock.json     # Plugin version lock file
+└── ghostty/
+    └── config         # Ghostty terminal configuration
 ```
 
 ## 🛠️ Installation
+
+### Neovim Configuration
 
 1. **Backup your current config:**
    ```bash
@@ -81,6 +92,26 @@ vvim/
    ```
 
 4. **Lazy.nvim will automatically install all plugins.**
+
+### Ghostty Terminal Configuration
+
+1. **Install Ghostty** (macOS):
+   ```bash
+   brew install --cask ghostty
+   ```
+   Or download from [ghostty.org](https://ghostty.org)
+
+2. **Backup existing Ghostty config:**
+   ```bash
+   mv "$HOME/Library/Application Support/com.mitchellh.ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.backup"
+   ```
+
+3. **Copy Ghostty configuration:**
+   ```bash
+   cp ~/.config/nvim/ghostty/config "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+   ```
+
+4. **Restart Ghostty** or press `Cmd+Shift+,` to reload configuration.
 
 ## ⌨️ Key Mappings
 
@@ -137,7 +168,14 @@ vvim/
 - Clippy integration
 
 ### Transparent Themes
-All themes configured with transparent backgrounds for a clean look.
+All themes configured with transparent backgrounds for a clean look that pairs perfectly with the Ghostty terminal's transparency.
+
+### Ghostty Terminal Features
+- **Background Opacity**: 80% transparency for subtle background visibility
+- **Background Blur**: 15px blur for beautiful frosted glass effect
+- **Window Decorations**: Disabled for clean, minimal interface
+- **Custom Padding**: 10px horizontal and vertical padding
+- **Dark Background**: #1a1a1a for comfortable viewing
 
 ## 🔧 Customization
 
