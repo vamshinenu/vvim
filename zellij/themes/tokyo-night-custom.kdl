@@ -1,0 +1,24 @@
+// Custom Tokyonight Zellij Colors with subtle pane frames
+themes {
+    tokyo_night_custom {
+        fg "#c0caf5"
+        bg "#292e42"
+        black "#1a1b26"
+        red "#f7768e"
+        green "#9ece6a"
+        yellow "#e0af68"
+        blue "#7aa2f7"
+        magenta "#bb9af7"
+        cyan "#7dcfff"
+        white "#a9b1d6"
+        orange "#ff9e64"
+        // More subtle colors for UI elements
+        dim_fg "#565f89"
+        dim_bg "#1f2335"
+        // Tab colors - change highlight to lighter gray
+        tab_active_bg "#4a4f5f"
+        tab_inactive_bg "#2a2f3f"
+        tab_text "#c0caf5"
+        tab_active_text "#ffffff"
+    }
+}
