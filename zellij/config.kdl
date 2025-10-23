@@ -155,7 +155,6 @@ keybinds {
         bind "Alt n" { NewPane; }
         bind "Shift Right" { MoveTab "right"; }
         bind "Shift l" { MoveTab "right"; }
-        bind "Shift c" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         bind "Ctrl q" { Quit; }
