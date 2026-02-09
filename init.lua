@@ -20,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   defaults = { lazy = false },
   install = { colorscheme = { "nightfox" } },
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
   change_detection = { notify = false },
 })
 
@@ -129,6 +129,12 @@ vim.opt.ignorecase = true -- Ignore case in search
 vim.opt.smartcase = true -- Smart case search
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.showmode = false -- Don't show mode in command line
+
+-- Auto-reload files when changed externally
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "checktime",
+})
 vim.opt.splitbelow = true -- Horizontal splits to bottom
 vim.opt.splitright = true -- Vertical splits to right
 
@@ -139,10 +145,8 @@ vim.opt.foldlevel = 99
 vim.opt.foldtext = ""
 vim.opt.fillchars = { fold = " " }
 
--- Buffer navigation
-vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<cr>", { desc = "Pick buffer to close" })
+-- Buffer navigation removed to avoid conflict with Tab completion
+-- Use <leader>j for previous buffer and <leader>k for next buffer instead
 
 -- Buffer closing with smart handling (moved to plugins.lua to avoid conflicts)
 -- vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Delete buffer" })

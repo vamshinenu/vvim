@@ -1,0 +1,62 @@
+-- Treesitter for syntax highlighting
+return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "lua",
+          "rust",
+          "javascript",
+          "typescript",
+          "svelte",
+          "html",
+          "css",
+          "json",
+          "yaml",
+          "toml",
+          "xml",
+          "markdown",
+          "markdown_inline",
+          "bash",
+          "python",
+          "go",
+          "java",
+          "cpp",
+          "c",
+          "php",
+          "ruby",
+          "sql",
+          "dockerfile",
+          "graphql",
+          "vim",
+          "vimdoc",
+          "regex",
+          "comment",
+          "diff",
+          "gitcommit",
+          "gitignore",
+          "git_rebase",
+          "gitattributes",
+          "git_config",
+          "query",
+          "http",
+          "jsonc",
+          "scss",
+          "vue",
+        },
+        highlight = {
+          enable = true,
+        },
+        indent = {
+          enable = true,
+        },
+        fold = {
+          enable = true,
+        },
+        auto_install = true,
+      })
+    end,
+  },
+}
