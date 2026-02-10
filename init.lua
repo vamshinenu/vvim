@@ -24,9 +24,6 @@ require("lazy").setup("plugins", {
   change_detection = { notify = false },
 })
 
--- Initialize theme system
-require("themes").set_theme("nightfox")
-
 -- Basic settings
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -130,6 +127,8 @@ vim.opt.smartcase = true -- Smart case search
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.showmode = false -- Don't show mode in command line
 
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
+
 -- Auto-reload files when changed externally
 vim.opt.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
@@ -165,4 +164,17 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 -- Better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })
+
+-- Copy file path with line range in visual mode
+vim.keymap.set("v", "<leader>c", function()
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  local path = vim.fn.expand("%:.")
+  local result = path .. ":" .. start_line .. "-" .. end_line
+  vim.fn.setreg("+", result)
+  vim.notify("Copied: " .. result)
+end, { desc = "Copy file path with line range" })
 
