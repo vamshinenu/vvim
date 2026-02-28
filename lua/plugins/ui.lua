@@ -163,6 +163,7 @@ return {
         { "<leader>ft", desc = "Focus file explorer" },
 
         { "<leader>w", desc = "Save" },
+        { "<leader>W", desc = "Save all" },
         { "<leader>q", desc = "Quit" },
         { "<leader>wq", desc = "Save and quit" },
         { "<leader>h", desc = "Clear search highlights" },
@@ -173,7 +174,7 @@ return {
         { "<leader>af", desc = "Format file" },
         { "<leader>al", desc = "LSP code actions" },
         { "<leader>as", desc = "Suggestions menu" },
-        { "<leader>an", desc = "Rename" },
+        { "<leader>ar", desc = "Rename symbol" },
         { "<leader>am", desc = "Supermaven status" },
         { "<leader>au", desc = "Supermaven use free" },
         { "<leader>ap", desc = "Supermaven use pro" },
@@ -262,8 +263,9 @@ return {
         { "yi,", desc = "Yank inside parameter", mode = "o" },
       })
       
-      -- Save with <leader>w
+      -- Save with <leader>w, save all with <leader>W
       vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+      vim.keymap.set("n", "<leader>W", "<cmd>wa<cr>", { desc = "Save all" })
       
       -- AI commands
       vim.keymap.set("n", "<leader>aa", function()
@@ -310,29 +312,29 @@ return {
       vim.keymap.set("n", "<leader>as", function()
         vim.cmd("startinsert")
         vim.schedule(function()
-          vim.fn.feedkeys("<C-Space>", "i")
+          require("blink.cmp").show()
         end)
       end, { desc = "Trigger code suggestions" })
-      
+
       -- Double leader trigger for completion in normal mode
       vim.keymap.set("n", "<leader><leader>", function()
         vim.cmd("startinsert")
         vim.schedule(function()
-          vim.fn.feedkeys("<C-Space>", "i")
+          require("blink.cmp").show()
         end)
       end, { desc = "Trigger completion" })
-      
+
       -- Normal mode completion trigger (Ctrl+Space in normal mode)
       vim.keymap.set("n", "<C-Space>", function()
         vim.cmd("startinsert")
         vim.schedule(function()
-          vim.fn.feedkeys("<C-Space>", "i")
+          require("blink.cmp").show()
         end)
       end, { desc = "Trigger completion from normal mode" })
-      
+
       -- Insert mode manual completion trigger (Alt+c)
       vim.keymap.set("i", "<M-c>", function()
-        require("cmp").complete()
+        require("blink.cmp").show()
       end, { desc = "Manual completion trigger" })
       
       -- Folding keymaps
@@ -499,7 +501,7 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "nightfox",
+          theme = "onedark",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = { "neo-tree", "alpha" },

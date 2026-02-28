@@ -31,7 +31,6 @@ return {
           "jsonls",
           "yamlls",
           "eslint",
-          "tailwindcss",
           "prismals",
           "pyright",
           "bashls",
@@ -54,7 +53,7 @@ return {
       -- TypeScript/JavaScript
       vim.lsp.config['ts_ls'] = {
         cmd = { 'typescript-language-server', '--stdio' },
-        filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+        filetypes = { 'javascript', 'typescript' },
         root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
         capabilities = capabilities,
       }
@@ -120,7 +119,7 @@ return {
       -- ESLint
       vim.lsp.config['eslint'] = {
         cmd = { 'vscode-eslint-language-server', '--stdio' },
-        filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue', 'svelte', 'astro' },
+        filetypes = { 'javascript', 'typescript', 'svelte' },
         root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.cjs', '.eslintrc.json', 'eslint.config.js', 'eslint.config.mjs', 'package.json', '.git' },
         capabilities = capabilities,
         on_init = function(client)
@@ -144,14 +143,6 @@ return {
             workingDirectory = { mode = "auto" },
           },
         },
-      }
-
-      -- Tailwind CSS
-      vim.lsp.config['tailwindcss'] = {
-        cmd = { 'tailwindcss-language-server', '--stdio' },
-        filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
-        root_markers = { 'tailwind.config.js', 'tailwind.config.cjs', 'tailwind.config.mjs', 'tailwind.config.ts', 'postcss.config.js', 'package.json', '.git' },
-        capabilities = capabilities,
       }
 
       -- Prisma
@@ -189,7 +180,7 @@ return {
       -- GraphQL
       vim.lsp.config['graphql'] = {
         cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
-        filetypes = { 'graphql', 'typescriptreact', 'javascriptreact' },
+        filetypes = { 'graphql' },
         root_markers = { '.graphqlrc', '.graphqlrc.js', '.graphqlrc.json', '.graphqlrc.yaml', '.graphqlrc.yml', 'graphql.config.js', 'graphql.config.json', 'graphql.config.yaml', 'graphql.config.yml', '.git' },
         capabilities = capabilities,
       }
@@ -229,7 +220,6 @@ return {
         'jsonls',
         'yamlls',
         'eslint',
-        'tailwindcss',
         'prismals',
         'pyright',
         'bashls',
@@ -250,11 +240,16 @@ return {
         end,
       })
 
-      -- Keymaps for LSP
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
-      vim.keymap.set("n", "<leader>ar", vim.lsp.buf.rename, { desc = "Rename symbol" })
+      -- Keymaps for LSP (buffer-local, only when LSP is attached)
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local buf = args.buf
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = buf, desc = "Go to definition" })
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = buf, desc = "Go to references" })
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = buf, desc = "Hover documentation" })
+          vim.keymap.set("n", "<leader>ar", vim.lsp.buf.rename, { buffer = buf, desc = "Rename symbol" })
+        end,
+      })
 
       -- LSP refresh/restart keymaps
       vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })

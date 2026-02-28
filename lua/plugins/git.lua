@@ -81,18 +81,18 @@ return {
   {
     "tpope/vim-fugitive",
     cmd = { "G", "Git", "Gdiffsplit", "Gread", "Gwrite", "Ggrep", "GMove", "GRename", "GDelete", "GBrowse", "GRemove", "GUnlink", "Gclog", "Gllog" },
-    config = function()
-      vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr>", { desc = "Git status" })
-      vim.keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git commit" })
-      vim.keymap.set("n", "<leader>ga", "<cmd>Git add %<cr>", { desc = "Git add current file" })
-      vim.keymap.set("n", "<leader>gA", "<cmd>Git add .<cr>", { desc = "Git add all" })
-      vim.keymap.set("n", "<leader>gp", "<cmd>Git push<cr>", { desc = "Git push" })
-      vim.keymap.set("n", "<leader>gl", "<cmd>Git pull<cr>", { desc = "Git pull" })
-      vim.keymap.set("n", "<leader>gd", "<cmd>Gdiffsplit<cr>", { desc = "Git diff split" })
-      vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Git blame" })
-      vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git write (stage)" })
-      vim.keymap.set("n", "<leader>gr", "<cmd>Gread<cr>", { desc = "Git read (checkout)" })
-    end,
+    keys = {
+      { "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
+      { "<leader>gc", "<cmd>Git commit<cr>", desc = "Git commit" },
+      { "<leader>ga", "<cmd>Git add %<cr>", desc = "Git add current file" },
+      { "<leader>gA", "<cmd>Git add .<cr>", desc = "Git add all" },
+      { "<leader>gp", "<cmd>Git push<cr>", desc = "Git push" },
+      { "<leader>gl", "<cmd>Git pull<cr>", desc = "Git pull" },
+      { "<leader>gd", "<cmd>Gdiffsplit<cr>", desc = "Git diff split" },
+      { "<leader>gb", "<cmd>Git blame<cr>", desc = "Git blame" },
+      { "<leader>gw", "<cmd>Gwrite<cr>", desc = "Git write (stage)" },
+      { "<leader>gr", "<cmd>Gread<cr>", desc = "Git read (checkout)" },
+    },
   },
 
   -- GitHub integration (octo.nvim)

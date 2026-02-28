@@ -19,7 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup("plugins", {
   defaults = { lazy = false },
-  install = { colorscheme = { "nightfox" } },
+  install = { colorscheme = { "onedark" } },
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
 })

@@ -401,7 +401,7 @@ return {
         { "<leader>af", desc = "Format file" },
         { "<leader>al", desc = "LSP code actions" },
         { "<leader>as", desc = "Suggestions menu" },
-        { "<leader>an", desc = "Rename" },
+        { "<leader>ar", desc = "Rename symbol" },
         { "<leader>am", desc = "Supermaven status" },
         { "<leader>au", desc = "Supermaven use free" },
         { "<leader>ap", desc = "Supermaven use pro" },
