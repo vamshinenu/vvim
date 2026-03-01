@@ -19,10 +19,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup("plugins", {
   defaults = { lazy = false },
-  install = { colorscheme = { "onedark" } },
+  install = { colorscheme = { "default" } },
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
 })
+
+-- Initialize theme
+require("themes").set_theme("zone_green")
 
 -- Basic settings
 vim.opt.number = true
@@ -103,7 +106,7 @@ vim.cmd([[
   highlight Folded guibg=NONE ctermbg=NONE
   highlight EndOfBuffer guibg=NONE ctermbg=NONE
   highlight SignColumn guibg=NONE ctermbg=NONE
-  
+
   " Ensure line numbers are visible
   highlight LineNr guifg=#5eacd3
   highlight LineNrAbove guifg=#5eacd3
