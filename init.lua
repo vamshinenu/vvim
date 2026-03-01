@@ -1,3 +1,7 @@
+-- Disable netrw BEFORE anything else (must be before lazy.setup and plugin loading)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Set leader key BEFORE loading anything else
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -52,12 +56,8 @@ vim.g.have_nerd_font = true
 -- Enable transparency (no blur)
 vim.opt.termguicolors = true
 
--- Disable netrw and use neo-tree instead
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- Clear any existing netrw autocommands
-vim.api.nvim_create_augroup("netrw", { clear = true })
+-- Clear any existing netrw/FileExplorer autocommands (netrw uses the FileExplorer augroup)
+vim.api.nvim_create_augroup("FileExplorer", { clear = true })
 
 -- Start with empty buffer instead of netrw directory
 vim.api.nvim_create_autocmd("VimEnter", {
