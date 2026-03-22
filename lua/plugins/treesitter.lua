@@ -53,7 +53,7 @@ return {
           enable = true,
         },
         fold = {
-          enable = true,
+          enable = false,
         },
         auto_install = true,
       })

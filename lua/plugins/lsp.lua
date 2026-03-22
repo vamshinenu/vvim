@@ -260,7 +260,7 @@ return {
           vim.lsp.stop_client(client.id)
         end
         vim.defer_fn(function()
-          vim.cmd("edit")
+          vim.cmd("edit!")
         end, 100)
         print("All LSP clients restarted")
       end, { desc = "Force restart all LSP" })

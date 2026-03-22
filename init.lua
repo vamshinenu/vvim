@@ -129,6 +129,7 @@ vim.opt.ignorecase = true -- Ignore case in search
 vim.opt.smartcase = true -- Smart case search
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.showmode = false -- Don't show mode in command line
+vim.opt.lazyredraw = true -- Skip redraws during macros and commands
 
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
 
@@ -140,9 +141,8 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
 vim.opt.splitbelow = true -- Horizontal splits to bottom
 vim.opt.splitright = true -- Vertical splits to right
 
--- Folding configuration
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- Folding configuration (using manual to avoid per-keystroke overhead from expr)
+vim.opt.foldmethod = "manual"
 vim.opt.foldlevel = 99
 vim.opt.foldtext = ""
 vim.opt.fillchars = { fold = " " }
@@ -157,6 +157,29 @@ vim.opt.fillchars = { fold = " " }
 -- Leader key buffer navigation (j for previous, k for next - like vim motion)
 vim.keymap.set("n", "<leader>j", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>k", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+
+-- Pinned file slots: <leader>1-5 to jump, <leader>p1-p5 to pin current file
+local pinned_files = {}
+
+for i = 1, 5 do
+  vim.keymap.set("n", "<leader>p" .. i, function()
+    local path = vim.api.nvim_buf_get_name(0)
+    if path == "" then
+      print("No file to pin")
+      return
+    end
+    pinned_files[i] = path
+    print("Pinned slot " .. i .. ": " .. vim.fn.fnamemodify(path, ":."))
+  end, { desc = "Pin current file to slot " .. i })
+
+  vim.keymap.set("n", "<leader>" .. i, function()
+    if not pinned_files[i] then
+      print("Slot " .. i .. " is empty — use <leader>p" .. i .. " to pin a file")
+      return
+    end
+    vim.cmd("edit " .. vim.fn.fnameescape(pinned_files[i]))
+  end, { desc = "Go to pinned file " .. i })
+end
 
 -- Window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
