@@ -268,8 +268,24 @@ return {
       -- Diagnostic keymaps
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
-      vim.keymap.set("n", "<leader>fd", vim.diagnostic.open_float, { desc = "Show diagnostic in float" })
+      vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Show diagnostic in float" })
       vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Show diagnostic list" })
+      vim.keymap.set("n", "<leader>dc", function()
+        local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
+        if #diagnostics == 0 then
+          print("No diagnostics on this line")
+          return
+        end
+        local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+        local line = vim.fn.line(".")
+        local msgs = {}
+        for _, d in ipairs(diagnostics) do
+          table.insert(msgs, d.message)
+        end
+        local result = path .. ":" .. line .. " — " .. table.concat(msgs, "; ")
+        vim.fn.setreg("+", result)
+        print("Copied: " .. result)
+      end, { desc = "Copy diagnostic with file path" })
 
       -- Configure diagnostic signs
       vim.diagnostic.config({

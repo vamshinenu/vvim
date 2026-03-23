@@ -45,7 +45,7 @@ return {
             args = { "--stdin-filename", "$FILENAME", "-" },
           },
           rustfmt = {
-            command = "/Users/v/.local/share/nvim/mason/bin/rustfmt",
+            command = "rustfmt",
             args = { "--edition", "2021" },
           },
         },
